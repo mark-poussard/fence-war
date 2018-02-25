@@ -1,0 +1,20 @@
+function Board(){
+    this.createCell = function(){
+	
+    }
+}
+
+function Cell(topFence, bottomFence, leftFence, rightFence){
+    this.topFence = topFence;
+    this.bottomFence = bottomFence;
+    this.leftFence = leftFence;
+    this.rightFence = rightFence;
+}
+
+function Fence(){
+    this.isdrawn = false;
+}
+
+function HFence(){
+    Fence.call(this);
+}
