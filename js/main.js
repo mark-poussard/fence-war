@@ -19,6 +19,20 @@ function Board(){
 	this.lots = this.createLots(sizeX, sizeY);
     }
 
+    this.setBorders = function(){
+	var sizeX = this.sizeX;
+	var sizeY = this.sizeY;
+	var i;
+	for(i=0; i<sizeX; i++){
+	    this.hFences[0][i].isDrawn = true;
+	    this.hFences[sizeY+1].isDrawn = true;
+	}
+	for(i=0; i<sizeY; i++){
+	    this.vFences[i][0].isDrawn = true;
+	    this.vFences[i][sizeX+1].isDrawn = true;
+	}
+    }
+
     this.createHFences = function(sizeX, sizeY){
 	var hFences = [];
 	var j;
@@ -117,6 +131,10 @@ function Board(){
 	plyr = plyr % this.nbPlayers;
 	this.currentPlyr = plyr;
     }
+
+    this.getCurrentPlayer = function(){
+	return this.players[this.currentPlyr];
+    }
 }
 
 function Lot(htmlObj, topFence, bottomFence, leftFence, rightFence){
@@ -135,15 +153,21 @@ function Lot(htmlObj, topFence, bottomFence, leftFence, rightFence){
 	if(this.ownedBy === null && this.isLotClosed() === true){
 	    this.ownedBy = player;
 	    player.points += 1;
+	    this.updateVisuals();
 	    return true;
 	}
 	return false;
     }
+
+    this.updateVisuals = function(){
+	this.htmlObj.style.backgroundColor = this.ownedBy.color;
+    }
 }
 
 function Fence(htmlObj){
+    var self = this;
     this.htmlObj = htmlObj;
-    this.isdrawn = false;
+    this.isDrawn = false;
 
     this.draw = function(player){
 	this.isDrawn = true;
@@ -151,7 +175,10 @@ function Fence(htmlObj){
     }
 
     htmlObj.onclick = function(){
-	
+	if(!self.isDrawn){
+	    var player = board.getCurrentPlayer();
+	    self.draw(player);
+	}
     }
 }
 
@@ -166,4 +193,21 @@ function VFence(htmlObj){
 function Player(id){
     this.id = id;
     this.points = 0;
+    switch(id){
+    case 0:
+	this.color = "red";
+	break;
+    case 1:
+	this.color = "blue";
+	break;
+    case 2:
+	this.color = "green";
+	break;
+    case 3:
+	this.color = "yellow";
+	break;
+    case 4:
+	this.color = "orange";
+	break;
+    }
 }
