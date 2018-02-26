@@ -152,6 +152,7 @@ function Board() {
 				}
 			}
 		}
+	        this.updateGameVisuals();
 	}
 
 	this.updateGameVisuals = function () {
@@ -261,10 +262,11 @@ function Fence(boardObj) {
 		htmlObj.style.position = "absolute";
 		if (this.isDrawn) {
 			htmlObj.style.backgroundColor = "black";
+		        htmlObj.style.zIndex = 42;
 		} else {
 			htmlObj.style.backgroundColor = "white";
+		        htmlObj.style.zIndex = 41;
 		}
-		htmlObj.style.zIndex = 42;
 		htmlObj.style.left = (lotWidth * this.boardObj.x) + "px";
 		htmlObj.style.top = (lotHeight * this.boardObj.y) + "px";
 	}
