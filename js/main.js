@@ -48,7 +48,7 @@ function Board() {
 		var i;
 		for (i = 0; i < sizeX; i++) {
 			this.hFences[0][i].isDrawn = true;
-			this.hFences[sizeY].isDrawn = true;
+			this.hFences[sizeY][i].isDrawn = true;
 		}
 		for (i = 0; i < sizeY; i++) {
 			this.vFences[i][0].isDrawn = true;
@@ -224,6 +224,7 @@ function Lot(boardObj, topFence, bottomFence, leftFence, rightFence) {
 		var height = board.htmlBoard.offsetHeight;
 		var lotWidth = width / sizeX;
 		var lotHeight = height / sizeY;
+		htmlObj.style.zIndex = 0;
 		htmlObj.style.width = lotWidth + "px";
 		htmlObj.style.height = lotHeight + "px";
 		htmlObj.style.position = "absolute";
@@ -263,6 +264,7 @@ function Fence(boardObj) {
 		} else {
 			htmlObj.style.backgroundColor = "white";
 		}
+		htmlObj.style.zIndex = 42;
 		htmlObj.style.left = (lotWidth * this.boardObj.x) + "px";
 		htmlObj.style.top = (lotHeight * this.boardObj.y) + "px";
 	}
