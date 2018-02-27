@@ -41,3 +41,24 @@ Lot.prototype.updateVisuals = function (board) {
 	htmlObj.style.left = (lotWidth * this.boardObj.x) + "px";
 	htmlObj.style.top = (lotHeight * this.boardObj.y) + "px";
 }
+
+Lot.prototype.numberOfDrawnBorders = function(){
+    var nbr = 0;
+    if(this.topFence.isDrawn){
+        nbr++;
+    }
+    if(this.bottomFence.isDrawn){
+        nbr++;
+    }
+    if(this.rightFence.isDrawn){
+        nbr++;
+    }
+    if(this.leftFence.isDrawn){
+        nbr++;
+    }
+    return nbr;
+}
+
+Lot.prototype.getFencesAsArray = function(){
+    return [this.topFence, this.bottomFence, this.rightFence, this.leftFence];
+}
