@@ -11,6 +11,7 @@ function Board() {
 	this.nbPlayers = 0;
 
 	this.initBoard = function (htmlBoard, htmlHeader, sizeX, sizeY, nbPlayers) {
+        this.currentPlyr = 0;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.htmlBoard = htmlBoard;

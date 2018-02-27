@@ -1,3 +1,24 @@
 .inlineInput{
     width : 50px;
 }
+
+.header {
+	height : 200px;
+	background-color : #69B0C8;
+	margin-bottom : 50px;
+	border-style : solid;
+	
+}
+
+.header p {
+	font-size : 150px;
+	font-family : sans-serif;
+	text-align : center;
+	background-color : inherit;
+	color : #04536D;
+	margin : 0;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	cursor : default;
+}

@@ -42,6 +42,9 @@ function Fence(boardObj) {
 		htmlObj.style.left = (lotWidth * this.boardObj.x) + "px";
 		htmlObj.style.top = (lotHeight * this.boardObj.y) + "px";
         
+        htmlWrapper.style.position = "absolute";
+		htmlWrapper.style.zIndex = 48;
+        
         htmlWrapper.style.cursor = "pointer";
         
         htmlWrapper.onmouseout = function(){

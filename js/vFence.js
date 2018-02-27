@@ -19,8 +19,6 @@ function VFence(boardObj) {
 		htmlObj.style.left = (wrapperWidth/2) + "px";
 		htmlObj.style.top = 0 + "px";
         
-        wrapperObj.style.position = "absolute";
-		wrapperObj.style.zIndex = 48;
         wrapperObj.style.width = wrapperWidth + "px";
         wrapperObj.style.height = lotHeight + "px";
 		wrapperObj.style.left = (lotWidth * this.boardObj.x) - (wrapperWidth/2) + "px";

@@ -19,8 +19,6 @@ function HFence(boardObj) {
 		htmlObj.style.left = 0 + "px";
 		htmlObj.style.top = (wrapperHeight/2) + "px";
         
-        wrapperObj.style.position = "absolute";
-		wrapperObj.style.zIndex = 48;
         wrapperObj.style.height = wrapperHeight + "px";
         wrapperObj.style.width = lotWidth + "px";
 		wrapperObj.style.left = (lotWidth * this.boardObj.x) + "px";

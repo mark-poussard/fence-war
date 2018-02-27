@@ -4,13 +4,16 @@ function Player(id, htmlObj) {
 	this.score = 0;
 	switch (id) {
 	case 0:
-		this.color = "red";
+        // Red
+		this.color = "#FB5031";
 		break;
 	case 1:
-		this.color = "blue";
+        // Blue
+		this.color = "#237F9D";
 		break;
 	case 2:
-		this.color = "green";
+        // Green
+		this.color = "#24B856";
 		break;
 	case 3:
 		this.color = "yellow";
