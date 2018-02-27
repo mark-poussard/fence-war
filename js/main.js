@@ -153,7 +153,72 @@ function Board() {
 			}
 		}
 	        this.updateGameVisuals();
+            this.checkForGameEnd();
 	}
+
+    this.checkForGameEnd = function(){
+        var sizeX = this.sizeX;
+        var sizeY = this.sizeY;
+        var i;
+        var j;
+        var allFilled = true;
+        for(j=0; j<sizeY; j++){
+            for(i=0; i<sizeX; i++){
+                let lot = this.lots[]
+                if(!lot.isLotClosed()){
+                    allFilled = false;
+                }
+            }
+        }
+        if(allFilled){
+            this.gameEnd();
+        }
+    }
+
+    this.gameEnd = function(){
+        var winPlayer = this.players[0];
+        var draw = false;
+        var i;
+        for(i=1; i<this.nbPlayers; i++){
+            let winScore = winPlayer.score;
+            let compScore = this.players[i].score;
+            if(winScore < ocompScore){
+                draw = false;
+                winPlayer = this.players[i];
+            }
+            else if(winScore === compScore){
+                draw = true;
+            }
+        }
+        this.gameEndCreateVisuals(winPlayer, draw);
+    }
+
+    this.gameEndCreateVisuals = function(winPlayer, isDraw){
+	var width = board.htmlBoard.offsetWidth;
+	var height = board.htmlBoard.offsetHeight;
+        var msgWidth;
+        var msgHeight;
+        var winMsg = document.createElement("span");
+        if(isDraw){
+            winMsg.textContent = "Draw";
+            winMsg.style.color = "gray";
+        }
+        else{
+            winMsg.textContent = "Player " + winPlayer.id + " has won !"
+            winMsg.style.color = winPlayer.color;
+        }
+        winMsg.style.fontSize = "18px";
+
+        msgWidth = winMsg.offsetWidth;
+        msgHeight = winMsg.offsetHeight;
+
+        winMsg.style.zIndex = 50;
+        winMsg.style.position = "absolute";
+        winMsg.style.left = (width/2) - (msgWidth/2);
+        winMsg.style.top = (height/2) - (msgHeight/2);
+        
+        this.htmlBoard.appendChild(winMsg);
+    }
 
 	this.updateGameVisuals = function () {
 		var i;
@@ -187,8 +252,6 @@ function Board() {
 	this.getCurrentPlayer = function () {
 		return this.players[this.currentPlyr];
 	}
-
-	this.updatePlayerVisuals = function () {}
 }
 
 function Lot(boardObj, topFence, bottomFence, leftFence, rightFence) {
@@ -206,7 +269,8 @@ function Lot(boardObj, topFence, bottomFence, leftFence, rightFence) {
 	this.updateLotOwner = function (player) {
 		if (this.ownedBy === null && this.isLotClosed() === true) {
 			this.ownedBy = player;
-			player.points += 1;
+			player.score
+ += 1;
 			return true;
 		}
 		return false;
@@ -310,7 +374,7 @@ function BoardElement(x, y, htmlObj) {
 function Player(id, htmlObj) {
 	this.htmlObj = htmlObj;
 	this.id = id;
-	this.points = 0;
+	this.score = 0;
 	switch (id) {
 	case 0:
 		this.color = "red";
@@ -330,7 +394,7 @@ function Player(id, htmlObj) {
 	}
 
 	this.updateVisuals = function (board) {
-		this.htmlObj.textContent = "Player " + this.id + " : " + this.points;
+		this.htmlObj.textContent = "Player " + this.id + " : " + this.score;
 		this.htmlObj.style.backgroundColor = this.color;
 		if (board.currentPlyr === this.id) {
 			this.htmlObj.style.borderBottom = "3px solid black";
