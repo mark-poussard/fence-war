@@ -34,7 +34,11 @@ Board.prototype.generatePlayers = function (nbPlayers) {
 	var i;
 	for (i = 0; i < nbPlayers; i++) {
 		let htmlPlayer = this.generatePlayerHtml();
-		players.push(new Player(i, htmlPlayer));
+		let player = new Player(i, htmlPlayer, this);
+            if(i>0){
+                player.ai = new Ai();
+            }
+            players.push(player);
 	}
 	return players;
 }
@@ -167,6 +171,17 @@ Board.prototype.updateGameState = function (player) {
 	if (gameEnd) {
 		this.gameEnd();
 	}
+    else{
+        this.makeAiPlay();
+    }
+}
+
+Board.prototype.makeAiPlay = function(){
+    var player = this.getCurrentPlayer();
+    if(player.ai !== null){
+        var fenceAiClick = player.ai.computeMove(this);
+        window.setTimeout(function(){fenceAiClick.draw(player)}, 500);
+    }
 }
 
 Board.prototype.gameEnd = function () {

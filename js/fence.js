@@ -12,7 +12,9 @@ function Fence(boardObj) {
 	boardObj.htmlObj.onclick = function () {
 		if (!self.isDrawn) {
 			var player = board.getCurrentPlayer();
+                    if(player.ai === null){
 			self.draw(player);
+                    }
 		}
 	}
 }
