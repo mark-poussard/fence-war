@@ -26,7 +26,6 @@ function Player(id, htmlObj, board) {
 	}
 
     this.htmlObj.onclick = function(){
-        if(board.currentPlyr !== this.id){
             if(self.ai === null){
                 self.ai = new Ai();
             }
@@ -34,6 +33,8 @@ function Player(id, htmlObj, board) {
                 self.ai = null;
             }
             self.updateVisuals(board);
+        if(board.currentPlyr === self.id){
+            board.makeAiPlay();
         }
     }
 }
@@ -54,11 +55,10 @@ Player.prototype.updateVisuals = function (board) {
 	this.htmlObj.style.color = "white";
 	this.htmlObj.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
 	this.htmlObj.style.margin = "10px";
+    this.htmlObj.style.cursor = "pointer";
 	if (board.currentPlyr === this.id) {
 		this.htmlObj.style.border = "3px solid black";
-            this.htmlObj.style.cursor = "initial";
 	} else {
 		this.htmlObj.style.border = null;
-            this.htmlObj.style.cursor = "pointer";
 	}
 }
