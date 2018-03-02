@@ -4,6 +4,7 @@ function Player(id, htmlObj, board) {
 	this.id = id;
 	this.score = 0;
     this.ai = null;
+    this.toggleNbr = 0;
 	switch (id) {
 	case 0:
 		// Red
@@ -26,11 +27,17 @@ function Player(id, htmlObj, board) {
 	}
 
     this.htmlObj.onclick = function(){
-            if(self.ai === null){
+            if(self.toggleNbr === 0){
                 self.ai = new Ai();
+                self.toggleNbr = 1;
             }
+        else if(self.toggleNbr === 1){
+            self.ai = new hardAi();
+            self.toggleNbr = 2;
+        }
             else{
                 self.ai = null;
+                self.toggleNbr = 0;
             }
             self.updateVisuals(board);
         if(board.currentPlyr === self.id){
@@ -42,11 +49,16 @@ function Player(id, htmlObj, board) {
 Player.prototype.updateVisuals = function (board) {
     var self = this;
     var plrTypeTxt;
-    if(this.ai === null){
+    switch(this.toggleNbr){
+        case 0:
         plrTypeTxt = "Human";
-    }
-    else{
-        plrTypeTxt = "Computer"
+        break;
+        case 1:
+        plrTypeTxt = "Computer - easy";
+        break;
+        case 2:
+        plrTypeTxt = "Computer - hard";
+        break;
     }
     this.htmlObj.classList.add("non-selectable-txt");
 

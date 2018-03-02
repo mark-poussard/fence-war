@@ -37,6 +37,7 @@ Board.prototype.generatePlayers = function (nbPlayers) {
 		let player = new Player(i, htmlPlayer, this);
             if(i>0){
                 player.ai = new Ai();
+                player.toggleNbr = 1;
             }
             players.push(player);
 	}

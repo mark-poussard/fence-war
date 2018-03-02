@@ -1,0 +1,3 @@
+function easyAi(){
+    Ai.call(this);
+}

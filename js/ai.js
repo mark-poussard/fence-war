@@ -34,19 +34,19 @@ Ai.prototype.computeMove = function(board){
     for(j=0; j<sizeY; j++){
         for(i=0; i<sizeX; i++){
             let lot = board.lots[j][i];
-            let nbr = lot.numberOfDrawnBorders();
-            switch(nbr){
-                case 0:
-                level3Lot.push(lot);
-                break;
+            let dispNbr = this.dispatchLot(i, j, board);
+            switch(dispNbr){
                 case 1:
-                level2Lot.push(lot);
+                level1Lot.push(lot);
                 break;
                 case 2:
-                level4Lot.push(lot);
+                level2Lot.push(lot);
                 break;
                 case 3:
-                level1Lot.push(lot);
+                level3Lot.push(lot);
+                break;
+                case 4:
+                level4Lot.push(lot);
                 break;
             }
         }
@@ -65,4 +65,23 @@ Ai.prototype.computeMove = function(board){
     }
     
     return this.selectFence(selectedLot);
+}
+
+Ai.prototype.dispatchLot = function(i, j, board){
+    let lot = board.lots[j][i];
+    let nbr = lot.numberOfDrawnBorders();
+    switch(nbr){
+    case 0:
+        return 3;
+        break;
+    case 1:
+        return 2;
+        break;
+    case 2:
+        return 4;
+        break;
+    case 3:
+        return 1;
+        break;
+    }    
 }

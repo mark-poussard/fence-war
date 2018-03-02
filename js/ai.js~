@@ -1,0 +1,9 @@
+function Ai(){
+}
+
+Ai.prototype.computeMove = function(board){
+    var sizeX = board.sizeX;
+    var sizeY = board.sizeY;
+    var i;
+    var j;
+}

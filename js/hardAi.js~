@@ -1,0 +1,3 @@
+function hardAi(){
+    Ai.call(this);
+}
