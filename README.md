@@ -2,7 +2,7 @@
 
 Fence war is a small JavaScript game inspired by a high school pen & paper game I used to play with friends.
 
-You can play it at : https://mark-poussard.github.io/fence-war/
+You can play it at : https://mark.poussard.io/fence-war/
 
 ## How to play
 
